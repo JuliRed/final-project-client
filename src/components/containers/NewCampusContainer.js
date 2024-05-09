@@ -12,7 +12,7 @@ import { Redirect } from 'react-router-dom';
 
 import NewCampusView from '../views/NewCampusView';
 import { addCampusThunk } from '../../store/thunks';
-import { addCampus } from '../../store/actions/actionCreators';
+//import { addCampus } from '../../store/actions/actionCreators';
 
 class NewCampusContainer extends Component {
   // Initialize state
@@ -21,7 +21,6 @@ class NewCampusContainer extends Component {
     this.state = {
       campusName: "", 
       campusAddress: "", 
-      //campusId: null,
       campusDesc: "", 
       redirect: false, 
       redirectId: null
@@ -39,10 +38,10 @@ class NewCampusContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let campus = {/////////////////////////////
+    let campus = {
+        imageURL: this.state.imageURL,
         campusNameame: this.state.campusName,
         campusAddress: this.state.campusAddress,
-        //campusId: this.state.campusId,
         campusDesc: this.state.campusDesc
     };
     
@@ -50,14 +49,19 @@ class NewCampusContainer extends Component {
     let newCampus = await this.props.addCampus(campus);
 
     // Update state, and trigger redirect to show the new student
-    this.setState({
+    try{
+      this.setState({
       campusName: "", 
       campusAddress: "", 
-      //campusId: null,
       campusDesc: "", 
       redirect: true, 
       redirectId: newCampus.id
-    });
+      });
+    }
+    catch(error){
+      console.log(error)
+      alert("It would appear you forgot something there, Chief. Please try again.")
+    }
   }
 
   // Unmount when the component is being removed from the DOM:
@@ -67,7 +71,7 @@ class NewCampusContainer extends Component {
 
   // Render new campus input form
   render() {
-    // Redirect to new campus's page after submit
+    // Redirect to new campus' page after submit
     if(this.state.redirect) {
       return (<Redirect to={`/campus/${this.state.redirectId}`}/>)
     }
@@ -85,12 +89,12 @@ class NewCampusContainer extends Component {
   }
 }
 
-// The following input argument is passed to the "connect" function used by "NewStudentContainer" component to connect to Redux Store.
+// The following input argument is passed to the "connect" function used by "NewCampusContainer" component to connect to Redux Store.
 // The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
 // The "mapDispatch" calls the specific Thunk to dispatch its action. The "dispatch" is a function of Redux Store.
 const mapDispatch = (dispatch) => {
     return({
-        addCampus: (campus) => dispatch(addCampusThunk(campus)), /////////////////
+        addCampus: (campus) => dispatch(addCampusThunk(campus)),
     })
 }
 

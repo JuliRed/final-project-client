@@ -1,8 +1,8 @@
 /*==================================================
-NewStudentView.js
+NewCampusView.js
 
 The Views component is responsible for rendering web page with data provided by the corresponding Container component.
-It constructs a React component to display the new student page.
+It constructs a React component to display the new campus page.
 ================================================== */
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -26,7 +26,7 @@ const useStyles = makeStyles( () => ({
     shadows: ['none'],
   },
   formTitle:{
-    backgroundColor:'#c5c8d6',
+    backgroundColor:'#4051b5',
     marginBottom: '15px',
     textAlign: 'center',
     borderRadius: '5px 5px 0px 0px',
@@ -38,7 +38,7 @@ const NewCampusView = (props) => {
   const {handleChange, handleSubmit } = props;
   const classes = useStyles();
 
-  // Render a New Student view with an input form
+  // Render a New Campus view with an input form
   return (
     <div>
       <h1>New Campus</h1>
@@ -46,11 +46,16 @@ const NewCampusView = (props) => {
       <div className={classes.root}>
         <div className={classes.formContainer}>
           <div className={classes.formTitle}>
-            <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
+            <Typography style={{fontWeight: 'normal', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#FFFFFF'}}>
               Add a Campus
             </Typography>
           </div>
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
+            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Image URL: </label>
+            <input type="text" name="imageURL" onChange ={(e) => handleChange(e)} />
+            <br/>
+            <br/>
+
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
             <input type="text" name="campusName" onChange ={(e) => handleChange(e)} />
             <br/>

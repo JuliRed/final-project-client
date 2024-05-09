@@ -14,6 +14,7 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
       return action.payload;
     case at.ADD_CAMPUS:
       return [...state, action.payload]
+      //need to add delete campus here
     default:
       // If the Reducer doesn't recognize the Action Type, returns the previous (current) State unchanged.
       return state;
