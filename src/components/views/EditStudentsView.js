@@ -8,29 +8,33 @@ const useStyles = makeStyles(() => ({
     formContainer: {
         display: 'flex',
         flexDirection: 'column',
-        width: '50%',
+        width: '500px',
         margin: 'auto',
-        marginTop: '50px'
+        marginTop: '20px',
+        backgroundColor: '#ffcc99',
     },
 
     title: {
         flexGrow: 1,
         textAlign: 'left',
-        marginTop: '20px',
-        marginBottom: '20px'
+        marginTop: '15px',
+        marginBottom: '15px'
 
     },
 
     formTitle: {
-        marginBottom: '20px',
+        marginBottom: '15px',
         textAlign: 'center',
+        backgroundColor: '#e67300',
+        borderRadius: '3px',
+        padding: '10px',
     
 
     },
 
     customizeAppBar: {
-        backgroundColor: '#333333',
-        color: 'white',
+        backgroundColor: '#fff2e6',
+        color: '#11153e',
     },
     
 }));
@@ -52,37 +56,41 @@ const EditStudentsView = (props) => {
     
     return (
         <div>
-            <h1>Edit Student</h1>
+            <h1>EDIT STUDENT</h1>
             <div className={classes.root}>
                 <div className={classes.formContainer}>
                     <div className={classes.formTitle}>
-                        <Typography style={{fontSize: '24px', fontWeight: 'bold'}}>
-                            Enter New Information
+                        <Typography style={{fontSize: '20px', fontWeight: 'bold'}}>
+                            ENTER NEW INFORMATION
                         </Typography>
                     </div>
-                    <form style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
-                        <label>First Name:</label>
+                    <form style={{ textAlign:'center' }} onSubmit={(e) => handleSubmit(e)}>
+                        <label style={{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
                         <input type="text" name="firstname" onChange={(e) => handleChange(e)} />
                         <br />
                         <br />
 
-                        <label>Last Name:</label>
+                        <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
                         <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
                         <br />
                         <br />
 
-                        {/* <label>Email:</label>
+                        <label style={{color:'#11153e', fontWeight: 'bold'}}>Email: </label>
                         <input type="text" name="email" onChange={(e) => handleChange(e)} />
-                        <br /> */}
-
-                        {/* <label>Image URL:</label>
-                        <input type="text" name="imageURL" value={student.imageURL} onChange={handleChange} />
                         <br />
-                        <label>GPA:</label>
-                        <input type="text" name="gpa" value={student.gpa} onChange={handleChange} />
-                        <br /> */}
+                        <br />
 
-                        <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus ID:</label>
+                        <label style={{color:'#11153e', fontWeight: 'bold'}}>Image URL: </label>
+                        <input type="text" name="imageURL" onChange={handleChange} />
+                        <br />
+                        <br />
+
+                        <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
+                        <input type="text" name="gpa" onChange={handleChange} />
+                        <br />
+                        <br />
+
+                        <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus ID: </label>
                         <input type="text" defaultValue={campusId && campusId.campusId.campus_id !== null ? campusId.campusId.campus_id : ''} name='campusId' onChange={(e) => handleChange(e)} />
                         <br />
                         <br />
