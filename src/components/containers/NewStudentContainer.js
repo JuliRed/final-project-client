@@ -20,7 +20,8 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "", 
       lastname: "", 
-      campusId: null, 
+      campusId: null,
+      email: "", 
       redirect: false, 
       redirectId: null
     };
@@ -41,6 +42,7 @@ class NewStudentContainer extends Component {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         email: this.state.email,
+        imageURL: this.state.imageURL,
         gpa: this.state.gpa,
         campusId: this.state.campusId,
     };
@@ -52,14 +54,17 @@ class NewStudentContainer extends Component {
     try {
     this.setState({
       firstname: "", 
-      lastname: "", 
+      lastname: "",
+      email: "",
+      imageURL: null,
+      gpa: null, 
       campusId: null, 
       redirect: true, 
       redirectId: newStudent.id
     });
   }
-  catch(error) {
-    console.log(error);
+  catch(err) {
+    console.error(err);
     alert("Failed to add student. Please try again.");
   }
 }
