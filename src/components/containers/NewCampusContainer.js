@@ -41,7 +41,7 @@ class NewCampusContainer extends Component {
     // Correctly construct the campus object with the name property
     let campus = {
       imageURL: this.state.imageURL,
-      name: this.state.name, // Use name instead of campus
+      name: this.state.name, 
       address: this.state.address,
       description: this.state.description
     };
