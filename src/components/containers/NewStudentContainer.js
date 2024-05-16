@@ -20,7 +20,8 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "", 
       lastname: "", 
-      campusId: null, 
+      campusId: null,
+      email: "", 
       redirect: false, 
       redirectId: null
     };
@@ -58,8 +59,8 @@ class NewStudentContainer extends Component {
       redirectId: newStudent.id
     });
   }
-  catch(error) {
-    console.log(error);
+  catch(err) {
+    console.error(err);
     alert("Failed to add student. Please try again.");
   }
 }
