@@ -18,7 +18,7 @@ const AllCampusesView = (props) => {
         <button>Add New Campus</button>
         </Link>
       </div>
-      );
+    )
   }
 
   // If there is at least one campus, render All Campuses view 
@@ -31,7 +31,7 @@ const AllCampusesView = (props) => {
           <Link to={`/campus/${campus.id}`}>
             <h2>{campus.name}</h2>
           </Link>
-          <img src={campus.imageURL} style={{ width: '50%', height: 'auto' }}></img>
+          <img src={campus.imageURL} alt={campus.name} style={{ width: '50%', height: 'auto' }}></img>
           <h4>campus id: {campus.id}</h4>
           <p>{campus.address}</p>
           <p>{campus.description}</p>

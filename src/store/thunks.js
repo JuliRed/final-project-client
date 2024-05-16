@@ -76,7 +76,7 @@ export const addCampusThunk = (campus) => async (dispatch) => {  // The THUNK
   } catch(err) {
     console.error(err);
   }
-};
+}
 
 // Delete Campus
 export const deleteCampusThunk = (campusId) => async (dispatch) => {  // The THUNK
@@ -87,20 +87,20 @@ export const deleteCampusThunk = (campusId) => async (dispatch) => {  // The THU
   } catch(err) {
     console.error(err);
   }
-};
+}
 
 // Edit Campus
 // THUNK CREATOR:
 export const editCampusThunk = (campus) => async dispatch => {  // The THUNK
   try {
-    // API "put" call to update student (based on "id" and "student" object's data) from database
+    // API "put" call to update campus (based on "id" and "campus" object's data) from database
     let updatedCampus = await axios.put(`/api/campuses/${campus.id}`, campus); 
     // Update successful so change state with dispatch
     dispatch(ac.editCampus(updatedCampus));
   } catch(err) {
     console.error(err);
   }
-};
+}
 
 
 
@@ -119,7 +119,7 @@ export const deleteStudentThunk = studentId => async dispatch => {  // The THUNK
 
 // Edit Student
 // THUNK CREATOR:
-export const editStudentThunk = student => async dispatch => {  // The THUNK
+export const editStudentThunk = (student) => async dispatch => {  // The THUNK
   try {
     // API "put" call to update student (based on "id" and "student" object's data) from database
     let updatedStudent = await axios.put(`/api/students/${student.id}`, student); 

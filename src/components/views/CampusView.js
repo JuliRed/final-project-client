@@ -10,6 +10,10 @@ import { Link } from "react-router-dom";
 const CampusView = (props) => {
   const {campus, handleDelete, deleteStudent} = props;
   const campus_id = campus.id;
+
+  ////////log testing img
+    // Log the imageURL to the console
+    console.log("Image URL:", campus.imageURL);
   
   // Render a single Campus view with list of its students
   return (
@@ -36,13 +40,13 @@ const CampusView = (props) => {
     }
     <br></br>
     <Link to={{
-      pathname: '/newstudent',
+      pathname: `/newstudent`,
       query: {campus_id}
     }}>
       <button> Enroll New Student</button>
     </Link>
     <Link to={{
-      pathname: '/students',
+      pathname: `/students`,
       query: {campus_id}
     }}>
       <button>Enroll Registered Student</button>
