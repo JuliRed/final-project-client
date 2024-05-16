@@ -1,4 +1,4 @@
-/*==================================================
+/*================================================== DONE
 /src/store/reducers/campus.js
 
 This is a Reducer function that accepts 2 parameters: the previous state object (aka current state) and an action object. 

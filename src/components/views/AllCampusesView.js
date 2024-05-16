@@ -14,10 +14,9 @@ const AllCampusesView = (props) => {
       <div>
         <h3>There are no campuses. Tough luck, kid.</h3>
         <br/><br/>
-        <Link to={`/`}>
+        <Link to={`/newcampus`}>
         <button>Add New Campus</button>
-      </Link>
-
+        </Link>
       </div>
       );
   }
@@ -32,14 +31,18 @@ const AllCampusesView = (props) => {
           <Link to={`/campus/${campus.id}`}>
             <h2>{campus.name}</h2>
           </Link>
+          <img src={campus.imageURL} style={{ width: '50%', height: 'auto' }}></img>
           <h4>campus id: {campus.id}</h4>
           <p>{campus.address}</p>
           <p>{campus.description}</p>
+          <button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>
+          <Link to={`/editcampus/${campus.id}`}><button>Edit Campus</button>
+          </Link>
           <hr/>
         </div>
       ))}
       <br/>
-      <Link to={`/`}>
+      <Link to={`/newCampus`}>
         <button>Add New Campus</button>
       </Link>
       <br/><br/>

@@ -1,4 +1,4 @@
-/*==================================================
+/*==================================================DONE
 /src/store/reducers/campuses.js
 
 This is a Reducer function that accepts 2 parameters: the previous state object (aka current state) and an action object. 
@@ -12,6 +12,11 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
   switch (action.type) {
     case at.FETCH_ALL_CAMPUSES:
       return action.payload;
+    case at.ADD_CAMPUS:
+      return [...state, action.payload]
+//need to add delete campus here
+    case at.DELETE_CAMPUS:
+      return state.filter((campus) => campus.id !==action.payload);
     default:
       // If the Reducer doesn't recognize the Action Type, returns the previous (current) State unchanged.
       return state;

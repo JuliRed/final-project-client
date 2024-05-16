@@ -1,4 +1,4 @@
-/*==================================================
+/*================================================== DONE
 /src/store/index.js
 
 It contains the necessities and accessories for constructing the Redux Store.

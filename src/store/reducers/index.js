@@ -1,4 +1,4 @@
-/*==================================================
+/*================================================== DONE
 /src/store/reducers/index.js
 
 This is a "barrel" file for the Reducers, which combines all the exports of individual Reducers and to be
