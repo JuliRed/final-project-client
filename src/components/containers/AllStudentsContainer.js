@@ -29,6 +29,7 @@ class AllStudentsContainer extends Component {
       <div>
         <Header />
         <AllStudentsView 
+          campusId = {this.props.location.query}
           students={this.props.allStudents}
           deleteStudent={this.props.deleteStudent}   
         />
