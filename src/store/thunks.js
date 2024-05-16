@@ -4,7 +4,8 @@
 It contains all Thunk Creators and Thunks.
 ================================================== */
 import * as ac from './actions/actionCreators';  // Import Action Creators ("ac" keyword Action Creator)
-const axios = require('axios');
+// const axios = require('axios');
+import axios from 'axios';
 
 //All Campuses
 // THUNK CREATOR:
