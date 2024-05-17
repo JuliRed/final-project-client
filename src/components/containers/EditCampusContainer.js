@@ -2,7 +2,6 @@
 src/components/containers/EditCampusContainer.js
 ==================================================*/
 
-
 import Header from './Header';
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -11,16 +10,31 @@ import { Redirect } from 'react-router-dom';
 import { editCampusThunk, fetchCampusThunk } from '../../store/thunks';
 
 class EditCampusContainer extends Component {
-    componentDidMount() {
-        this.props.fetchCampus(this.props.match.params.id);
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
+            name: "",
+            address: "",
+            description: "",
+            imageURL: "", // Add imageURL to component state
         };
     }
+
+    componentDidMount() {
+        const { fetchCampus, match } = this.props;
+        fetchCampus(match.params.id).then(() => {
+            // Set initial state with fetched campus data
+            const { campus } = this.props;
+            this.setState({
+                name: campus.name,
+                address: campus.address,
+                description: campus.description,
+                imageURL: campus.imageURL // Set initial imageURL from fetched data
+            });
+        });
+    }
+
     // Capture input data when it is entered
     handleChange = event => {
         this.setState({
@@ -28,24 +42,23 @@ class EditCampusContainer extends Component {
         });
     }
 
-    // Take action after user click the submit button
+    // Take action after user clicks the submit button
     handleSubmit = async event => {
-        event.preventDefault();  // Prevent browser reload/refresh after submit.
-        let { campus } = this.props;
+        event.preventDefault();
+        const { campus } = this.props;
+        const { name, address, description, imageURL } = this.state;
 
-        campus = {
-            name: this.state.name,
-            address: this.state.address,
-            description: this.state.description,
-            id: campus.id
+        // Create a new campus object with updated values including imageURL
+        const updatedCampus = {
+            id: campus.id,
+            name,
+            address,
+            description,
+            imageURL: imageURL || campus.imageURL // Use current imageURL if new one is not provided
         };
 
-        await this.props.editCampus(campus);
-
-        this.setState({
-            redirect: true
-        });
-
+        await this.props.editCampus(updatedCampus);
+        this.setState({ redirect: true });
     }
 
     render() {
@@ -56,21 +69,22 @@ class EditCampusContainer extends Component {
         return (
             <div>
                 <Header />
-                <EditCampusView handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                <EditCampusView 
+                    handleChange={this.handleChange} 
+                    handleSubmit={this.handleSubmit} 
+                    campus={this.props.campus} // Pass the current campus data to EditCampusView
+                />
             </div>
         );
     }
 }
 
-// The following 2 input arguments are passed to the "connect" function used by "StudentContainer" to connect to Redux Store.  
-// The following 2 input arguments are passed to the "connect" function used by "AllCampusesContainer" component to connect to Redux Store.
 const mapState = (state) => {
     return {
-        campus: state.campus,  // Get the State object from Reducer "campus"
+        campus: state.campus,
     };
 };
-// 2. The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
-// The "mapDispatch" calls the specific Thunk to dispatch its action. The "dispatch" is a function of Redux Store.
+
 const mapDispatch = (dispatch) => {
     return {
         fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
@@ -78,4 +92,4 @@ const mapDispatch = (dispatch) => {
     };
 };
 
-export default connect(mapState, mapDispatch)(EditCampusContainer) 
+export default connect(mapState, mapDispatch)(EditCampusContainer);
