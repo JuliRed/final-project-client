@@ -1,14 +1,13 @@
-/*==================================================
-NewCampusView.js
+// /*==================================================
+// NewCampusView.js
 
-The Views component is responsible for rendering web page with data provided by the corresponding Container component.
-It constructs a React component to display the new campus page.
-================================================== */
+// The Views component is responsible for rendering web page with data provided by the corresponding Container component.
+// It constructs a React component to display the new campus page.
+// ================================================== */
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-// Create styling for the input form
 const useStyles = makeStyles(() => ({
   formContainer: {  
     width: '500px',
@@ -35,10 +34,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NewCampusView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const { handleChange, handleSubmit, error } = props;
   const classes = useStyles();
 
-  // Render a New Campus view with an input form
   return (
     <div>
       <h1>New Campus</h1>
@@ -50,6 +48,7 @@ const NewCampusView = (props) => {
               Add a Campus
             </Typography>
           </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>Image URL: </label>
             <input type="text" name="imageURL" onChange ={(e) => handleChange(e)} />
@@ -77,7 +76,7 @@ const NewCampusView = (props) => {
             <br/>
             <br/>
           </form>
-          </div>
+        </div>
       </div>
     </div>    
   )
