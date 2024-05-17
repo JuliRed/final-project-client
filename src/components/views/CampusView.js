@@ -10,14 +10,11 @@ import { Link } from "react-router-dom";
 const CampusView = (props) => {
   const {campus, handleDelete, deleteStudent} = props;
   const campus_id = campus.id;
-
-  ////////log testing img
-    // Log the imageURL to the console
-    console.log("Image URL:", campus.imageURL);
   
   // Render a single Campus view with list of its students
   return (
     <div>
+      <br/><br/>
       <img src = {campus.imageURL} style={{width: '50%', height: 'auto', objectFit: 'scale-down'}} alt={campus.name}></img>
       <h1>{campus.name}</h1>
       <p>{campus.address}</p>
@@ -38,20 +35,26 @@ const CampusView = (props) => {
     ):
     (<h3>No students currently enrolled at this campus.</h3>)
     }
-    <br></br>
-    <Link to={{
-      pathname: `/newstudent`,
-      query: {campus_id}
-    }}>
-      <button> Enroll New Student</button>
-    </Link>
-    <Link to={{
-      pathname: `/students`,
-      query: {campus_id}
-    }}>
-      <button>Enroll Registered Student</button>
-    </Link>
-    <button onClick={handleDelete}>Delete Campus</button>
+    <br/>
+    <Link to={`/editcampus/${campus.id}`}>
+        <button>Edit Campus</button>
+      </Link>
+      <button onClick={handleDelete}>Delete Campus</button>
+      <br/>
+      {/* <Link to="/campuses">
+        <button>Back to All Campuses</button>
+      </Link>
+      <br/> */}
+      <Link to={{
+        pathname: `/newstudent`,
+        query: { campus_id }
+      }}>
+        <button>Enroll New Student</button>
+      </Link>
+      <Link to="/students">
+        <button>Enroll Registered Student</button>
+      </Link>
+      <br/><br/><br/>
     </div>
   );
 };

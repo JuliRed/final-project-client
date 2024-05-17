@@ -19,11 +19,13 @@ class NewCampusContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
+      imageURL: "",
       name: "", 
       address: "", 
       description: "", 
       redirect: false, 
-      redirectId: null
+      redirectId: null,
+      error: ""
     };
   }
 
@@ -34,9 +36,24 @@ class NewCampusContainer extends Component {
     });
   }
 
+  // Validate form inputs
+  validateInputs = () => {
+    const { imageURL, name, address, description } = this.state;
+    if (!imageURL || !name || !address || !description) {
+      return false;
+    }
+    return true;
+  }
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+
+    // Validate form inputs
+    if (!this.validateInputs()) {
+      this.setState({ error: "Please fill out all fields." });
+      return;
+    }
 
     // Correctly construct the campus object with the name property
     let campus = {
@@ -47,26 +64,29 @@ class NewCampusContainer extends Component {
     };
 
     // Add new campus in back-end database
-    let newCampus = await this.props.addCampus(campus);
-
-    // Update state, and trigger redirect to show the new campus
     try {
+      let newCampus = await this.props.addCampus(campus);
+
+      // Update state, and trigger redirect to show the new campus
+    //try {
       this.setState({
-        name: "", // Reset name to empty string
+        imageURL: "",
+        name: "", //
         address: "", 
         description: "", 
         redirect: true, 
-        redirectId: newCampus.id
+        redirectId: newCampus.id,
+        error: ""
       });
     } catch(error) {
       console.log(error);
-      alert("It would appear you forgot something there, Chief. Please try again.");
+      alert("Failed to add the new campus. Please try again.");
     }
   }
 
   // Unmount when the component is being removed from the DOM:
   componentWillUnmount() {
-    this.setState({redirect: false, redirectId: null});
+    this.setState({redirect: false, redirectId: null, error: ""});
   }
 
   // Render new campus input form
@@ -81,8 +101,9 @@ class NewCampusContainer extends Component {
       <div>
         <Header />
         <NewCampusView
-          handleChange = {this.handleChange} 
-          handleSubmit={this.handleSubmit}      
+          handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit}
+          error={this.state.error}      
         />
       </div>          
     );
