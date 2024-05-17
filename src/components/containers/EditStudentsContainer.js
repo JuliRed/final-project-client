@@ -58,18 +58,19 @@ class EditStudentsContainer extends Component {
     
     // Render Student view by passing student data as props to the corresponding View component
     render() {
-        const { student } = this.props;
+        // const { student } = this.props;
 
         if (this.state.redirect) {
-            return <Redirect to={`/students/${student.id}`} />;
+            // return <Redirect to={`/students/${student.id}`} />;
+            return <Redirect to={`/students/`} />
         }
 
         return (
         <div>
             <Header />
             <EditStudentsView
-            student={this.props.student}
-            campusId={this.props.location.query}
+            // student={this.props.student}
+            // campusId={this.props.location.query}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             // editStudent={this.props.editStudent}
