@@ -8,7 +8,11 @@ const HomePageView = () => {
   // Render Home page view
   return (
     <div >
-      <h1>Home Page</h1>
+      <br/><br/>
+      <h1>Welcome to our <br/>Campus Management System</h1>
+      <h3>Please feel free to explore and view, add, or delete campuses and students.</h3>
+      <br/><br/>
+      <p>Created by: Juliana Redondo and Drew Bruck</p>
     </div>
   );    
 }
