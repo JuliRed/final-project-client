@@ -7,6 +7,17 @@ It constructs a React component to display all campuses.
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+ // Style for delete button
+ const deleteButtonStyle = {
+  backgroundColor: '#f44336', // Light shade of red
+  color: '#ffffff',           // White text
+  border: 'none',
+  padding: '3px 7px',
+  margin: '5px',
+  cursor: 'pointer',
+  borderRadius: '5px',
+};
+
 const AllCampusesView = (props) => {
   // If there are no campuses, display a message.
   if (!props.allCampuses.length) {
@@ -39,7 +50,7 @@ const AllCampusesView = (props) => {
           <h4>campus id: {campus.id}</h4>
           <p>{campus.address}</p>
           <p>{campus.description}</p>
-          <button onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>
+          <button style={deleteButtonStyle} onClick={() => props.deleteCampus(campus.id)}>Delete Campus</button>
           <Link to={`/editcampus/${campus.id}`}><button>Edit Campus</button></Link>
           <hr/>
         </div>

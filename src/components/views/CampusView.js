@@ -11,6 +11,18 @@ const CampusView = (props) => {
   const {campus, handleDelete, deleteStudent} = props;
   const campus_id = campus.id;
   
+
+ // Style for delete button
+ const deleteButtonStyle = {
+  backgroundColor: '#f44336', // Light shade of red
+  color: '#ffffff',           // White text
+  border: 'none',
+  padding: '3px 7px',
+  margin: '5px',
+  cursor: 'pointer',
+  borderRadius: '5px',
+};
+
   // Render a single Campus view with list of its students
   return (
     <div>
@@ -28,7 +40,7 @@ const CampusView = (props) => {
             <Link to={`/student/${student.id}`}>
               <h2>{name}</h2>
             </Link>
-            <button onClick={() => deleteStudent(student)}>Remove Student</button>             
+            <button style={deleteButtonStyle} onClick={() => deleteStudent(student)}>Remove Student</button>             
           </div>
         );
       })
@@ -39,12 +51,9 @@ const CampusView = (props) => {
     <Link to={`/editcampus/${campus.id}`}>
         <button>Edit Campus</button>
       </Link>
-      <button onClick={handleDelete}>Delete Campus</button>
+      <button style={deleteButtonStyle} onClick={handleDelete}>Delete Campus</button>
       <br/>
-      {/* <Link to="/campuses">
-        <button>Back to All Campuses</button>
-      </Link>
-      <br/> */}
+
       <Link to={{
         pathname: `/newstudent`,
         query: { campus_id }
