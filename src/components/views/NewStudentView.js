@@ -34,8 +34,6 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#e67300',
         borderRadius: '3px',
         padding: '10px',
-    
-
     },
 
     customizeAppBar: {
@@ -46,7 +44,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit, campusId} = props;
+  const { handleChange, handleSubmit, campusId, error } = props;
   const classes = useStyles();
   useEffect(() => {
     if (campusId && campusId !== null) {
@@ -71,6 +69,7 @@ const NewStudentView = (props) => {
               ADD STUDENT
             </Typography>
           </div>
+          {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
             <label style={{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
             <input type="text" name="firstname" onChange ={(e) => handleChange(e)} />
