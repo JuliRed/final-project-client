@@ -13,12 +13,23 @@ const AllStudentsView = (props) => {
     return (
     <div>
       <p>There are no students.</p>
-      <Link to={`newstudent`}>
+      <Link to={`newstudent`} style={{ position: 'absolute', top: '100px', right: '40px' }}>
         <button>Add New Student</button>
       </Link>
     </div>
     );
   }
+
+  // Style for delete button
+ const deleteButtonStyle = {
+  backgroundColor: '#f44336', // Light shade of red
+  color: '#ffffff',           // White text
+  border: 'none',
+  padding: '3px 7px',
+  margin: '5px',
+  cursor: 'pointer',
+  borderRadius: '5px',
+};
   
   // If there is at least one student, render All Students view 
   return (
@@ -32,7 +43,18 @@ const AllStudentsView = (props) => {
               <Link to={`/student/${student.id}`}>
                 <h2>{name}</h2>
               </Link>
-              <button onClick={() => deleteStudent(student.id)}>Delete</button>
+      
+              <img src={student.imageURL} alt={name} style={{ width: '50%', height: 'auto' }}></img>
+              <h4>student id: {student.id}</h4>
+              <p>Email: {student.email}</p>
+              {student.campus ? (
+                <p>Campus: {student.campus.name}</p>
+              ) : (
+                <p>Campus: Currently not enrolled</p>
+              )}
+
+
+              <button style={ deleteButtonStyle } onClick={() => deleteStudent(student.id)}>Delete Student</button>
               
               <Link to={`/editstudent/${student.id}`}>
                 <button>Edit Student</button>
@@ -52,7 +74,7 @@ const AllStudentsView = (props) => {
         }
       )}
       <br/>
-      <Link to={`/newstudent`}>
+      <Link to={`/newstudent`} style={{ position: 'absolute', top: '100px', right: '40px' }}>
         <button>Add New Student</button>
       </Link>
       <br/><br/>
