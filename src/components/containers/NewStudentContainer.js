@@ -23,7 +23,8 @@ class NewStudentContainer extends Component {
       campusId: null,
       email: "", 
       redirect: false, 
-      redirectId: null
+      redirectId: null,
+      error: ""
     };
   }
 
@@ -34,9 +35,24 @@ class NewStudentContainer extends Component {
     });
   }
 
+  // Validate form inputs
+  validateInputs = () => {
+    const { firstname, lastname, email, campusId } = this.state;
+    if (!firstname || !lastname || !email || !campusId) {
+      return false;
+    }
+    return true;
+  }
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+
+    // Validate form inputs
+    if (!this.validateInputs()) {
+      this.setState({ error: "Please fill out all fields." });
+      return;
+    }
 
     let student = {
         firstname: this.state.firstname,
@@ -48,30 +64,30 @@ class NewStudentContainer extends Component {
     };
     
     // Add new student in back-end database
-    let newStudent = await this.props.addStudent(student);
-
-    // Update state, and trigger redirect to show the new student
     try {
-    this.setState({
-      firstname: "", 
-      lastname: "",
-      email: "",
-      imageURL: null,
-      gpa: null, 
-      campusId: null, 
-      redirect: true, 
-      redirectId: newStudent.id
-    });
+      let newStudent = await this.props.addStudent(student);
+
+      // Update state, and trigger redirect to show the new student
+      this.setState({
+        firstname: "", 
+        lastname: "",
+        email: "",
+        imageURL: null,
+        gpa: null, 
+        campusId: null, 
+        redirect: true, 
+        redirectId: newStudent.id,
+        error: ""
+      });
+    } catch(error) {
+      console.error(error);
+      alert("Failed to add the new student. Please try again.");
+    }
   }
-  catch(err) {
-    console.error(err);
-    alert("Failed to add student. Please try again.");
-  }
-}
 
   // Unmount when the component is being removed from the DOM:
   componentWillUnmount() {
-      this.setState({redirect: false, redirectId: null});
+    this.setState({ redirect: false, redirectId: null, error: "" });
   }
 
   // Render new student input form
@@ -88,7 +104,8 @@ class NewStudentContainer extends Component {
         <NewStudentView 
           campusId={this.props.location.query}
           handleChange={this.handleChange} 
-          handleSubmit={this.handleSubmit}      
+          handleSubmit={this.handleSubmit}
+          error={this.state.error}      
         />
       </div>          
     );
